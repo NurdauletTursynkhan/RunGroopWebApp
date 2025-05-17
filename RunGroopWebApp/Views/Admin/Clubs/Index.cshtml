@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RunGroopWebApp.Models.Club>
+
+@{
+    ViewData["Title"] = "Клубы";
+}
+
+<h2>Список всех клубов</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Город</th>
+            <th>Категория</th>
+            <th>Картинка</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var club in Model)
+        {
+            <tr>
+                <td>@club.Title</td>
+                <td>@(club.Address != null ? club.Address.City : "Город не указан")</td>
+                <td>@club.ClubCategory</td>
+                <td>
+                    <img src="@club.Image" width="100" alt="Изображение клуба" />
+                </td>
+                <td>
+                    <a asp-controller="Club" asp-action="Edit" asp-route-id="@club.Id">✏️</a> |
+                    <a asp-controller="Club" asp-action="Delete" asp-route-id="@club.Id">🗑️</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
